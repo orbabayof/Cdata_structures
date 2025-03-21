@@ -1,6 +1,7 @@
 #include "bucket.h"
 
 #include <stdio.h>
+#include <string.h>
 
 void print_int(void* data)
 {
@@ -17,30 +18,27 @@ bool cmpr_int(void* val1, void* val2)
   return *(int*)val1 == *(int*)val2;
 }
 
+void print_string(void* data)
+{
+  printf("%s", (char*)data);
+}
+
+bool cmpr_string(void* val1, void* val2)
+{
+  return !strcmp(val1, val2);
+}
+
 int main()
 {
   bucket_t* bucket;
-  int val1 = 1;
-  bucket_init(&bucket, 1, &val1);
-  int val2 = 2;
-  int val3 = 3;
-  int val4 = 4;
-  int key = 1;
 
-  bucket_add(&bucket, 1, &val2);
-  bucket_add(&bucket, 1, &val3);
-  bucket_add(&bucket, 1, &val4);
+  bucket_init(&bucket, "1", "val1");
 
-  printf("bucket: ");
-  bucket_print(&bucket, print_int);
 
-  bucket_t* found;
+  if(!bucket_delete(&bucket, "1", cmpr_string))
+    puts("not good");
 
-  if(bucket_find(&bucket, key, &val1, &found, cmpr_int))
-    puts("val1 found");
-  bucket_delete(&bucket, 1, &val3, cmpr_int);
-
-  bucket_print(&bucket, print_int);
+  bucket_print(&bucket, print_string);
 
 
   bucket_destory(bucket);
