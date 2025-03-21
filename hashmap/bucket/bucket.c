@@ -5,15 +5,13 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-/*
 struct bucket
 {
   void* data;
-  size_t hash_code;
+  void* key;
   
   struct bucket* next;
 };
-*/
 
 //dummy function helper
 static void do_not_destroy__(void*) {}

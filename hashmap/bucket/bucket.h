@@ -24,10 +24,3 @@ void bucket_destory(struct bucket*);
 bool bucket_delete(struct bucket** head, void* key, cmpfunc_t equal);
 bool bucket_delete_full(struct bucket** head, void* key, cmpfunc_t equal);
 
-struct bucket
-{
-  void* data;
-  void* key;
-  
-  struct bucket* next;
-};
