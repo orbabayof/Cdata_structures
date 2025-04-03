@@ -3,6 +3,14 @@
 #include <stddef.h>
 #include <stdbool.h>
 
+struct bucket
+{
+  void* data;
+  void* key;
+  
+  struct bucket* next;
+};
+
 typedef size_t (*hashfunc_t)(void*);
 typedef void (*printfunc_t)(void*);
 typedef bool (*cmpfunc_t)(void* val1, void* val2);

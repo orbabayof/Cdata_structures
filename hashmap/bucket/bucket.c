@@ -5,13 +5,6 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-struct bucket
-{
-  void* data;
-  void* key;
-  
-  struct bucket* next;
-};
 
 //dummy function helper
 static void do_not_destroy__(void*) {}
@@ -52,7 +45,7 @@ bool bucket_add(struct bucket** head, void* key, void* val)
 bool bucket_find(struct bucket** head, void* key, struct bucket** ret_bucket, cmpfunc_t equal)
 {
   struct bucket* curr = *head;
-  while((curr = curr->next))
+  while(curr)
   {
     if(equal(key, curr->key)) 
     {
@@ -63,6 +56,7 @@ bool bucket_find(struct bucket** head, void* key, struct bucket** ret_bucket, cm
       }
       return true;
     }
+    curr = curr->next;
   }
 
   return false;
